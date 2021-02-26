@@ -1,0 +1,16 @@
+@import url(./__image/post__image.css);
+@import url(./__delete/post__delete.css);
+@import url(./__info/post__info.css);
+@import url(./__title/post__title.css);
+@import url(./__like-button/post__like-button.css);
+@import url(./__like-button/_active/post__like-button_active.css);
+@import url(./__like-counter/post__like-counter.css);
+@import url(./__like-container/post__like-container.css);
+.post {
+  position: relative;
+  background-color: #fff;
+  color: black;
+  max-width: 282px;
+  width: 100%;
+  border-radius: 10px;
+}

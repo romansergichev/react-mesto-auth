@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 882px;
+  width: 100%;
+}

@@ -1,0 +1,28 @@
+.profile__name {
+  display: inline;
+  font-size: 42px;
+  line-height: 1.33;
+  font-weight: 500;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+@media screen and (max-width: 922px) {
+  .profile__name {
+    font-size: 32px;
+    line-height: 1.75;
+  }
+}
+
+@media screen and (max-width: 622px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 2.07;
+  }
+}
+
+@-moz-document url-prefix() {
+  .profile__name {
+    vertical-align: middle;
+  }
+}

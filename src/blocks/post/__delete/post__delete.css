@@ -1,0 +1,12 @@
+.post__delete {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  border: none;
+  background-color: transparent;
+  height: 20px;
+  width: 18px;
+  padding: 0;
+  background: url(../../../images/icons/delete-button.svg) center no-repeat;
+  cursor: pointer;
+}

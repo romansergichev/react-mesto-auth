@@ -1,0 +1,4 @@
+.post__like-button_active {
+  opacity: 1;
+  background: url('../../../../images/icons/active-like-icon.svg');
+}

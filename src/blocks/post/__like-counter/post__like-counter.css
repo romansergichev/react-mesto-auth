@@ -1,0 +1,7 @@
+.post__like-counter {
+  display: block;
+  text-align: center;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.23;
+}

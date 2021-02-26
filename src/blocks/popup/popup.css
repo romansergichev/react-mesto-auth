@@ -1,0 +1,33 @@
+@import url(./__container/popup__container.css);
+@import url(./__container/_size/popup__container_size_s.css);
+@import url(./__close-button/popup__close-button.css);
+@import url(./__close-button/_position/popup__close-button_position_corner.css);
+@import url(./__title/popup__title.css);
+@import url(./__title/_margin/popup__title_margin.css);
+@import url(./__title/_margin/popup__title_confirm-margin.css);
+@import url(./__form/popup__form.css);
+@import url(./__input/popup__input.css);
+@import url(./__input/_type/popup__input_type_error.css);
+@import url(./__submit-button/popup__submit-button.css);
+@import url(./__submit-button/_disabled/popup__submit-button_disabled.css);
+@import url(./__photo-container/popup__photo-container.css);
+@import url(./__post-image/popup__post-image.css);
+@import url(./__post-title/popup__post-title.css);
+@import url(./__form-filed/popup__form-field.css);
+@import url(./__input-error/popup__input-error.css);
+
+.popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s visibility, .3s opacity ease-in-out;
+}
