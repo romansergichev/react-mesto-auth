@@ -1,8 +1,8 @@
 .root {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  justify-items: center; 
+  grid-template-rows: auto 1fr auto;
   max-width: 882px;
   width: 100%;
+  min-height: 100vh;
 }

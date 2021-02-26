@@ -1,0 +1,18 @@
+@import url(./__title/form__title.css);
+@import url(./__input/form__input.css);
+@import url(./__login/form__login.css);
+@import url(./__login-link/form__login-link.css);
+@import url(./__button/form__button.css);
+
+.register {
+  display: grid;
+  grid-template-columns:358px;
+  justify-items: center;
+  align-content: start;
+}
+
+@media screen and (max-width: 425px) {
+  .register {
+    grid-template-columns: 260px;
+  }
+}

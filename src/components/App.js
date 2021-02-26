@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import Header from './Header.js';
+import Register from "./Register.js";
+import Login from './Login.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup.js';
@@ -10,6 +12,7 @@ import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js'
 import avatar from '../images/icons/avatar.svg';
 import AddPlacePopup from './AddPlacePopup';
+import { Route, Switch } from 'react-router-dom';
 
 
 
@@ -26,6 +29,7 @@ function App() {
     avatar: avatar
   });
   const [cards, setCards] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function showRequestError(error) {
     return console.log(`Ошибка: ${error}`);
@@ -121,15 +125,25 @@ function App() {
       <div className="App">
         <div className="root">
           <Header />
-          <Main
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleDeleteCard}
-            onEditProfile={handleEditClick}
-            onAddCard={handleAddCardClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-          />
+          <Switch>
+            <Route exact path="/">
+              <Main
+                cards={cards}
+                onCardLike={handleCardLike}
+                onCardDelete={handleDeleteCard}
+                onEditProfile={handleEditClick}
+                onAddCard={handleAddCardClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+              />
+            </Route>
+            <Route path="/sign-in">
+              <Login />
+            </Route>
+            <Route path="/sign-up">
+              <Register />
+            </Route>
+          </Switch>
           <EditProfilePopup
             isOpened={isEditPopupOpened}
             onClose={closeAllPopups}
