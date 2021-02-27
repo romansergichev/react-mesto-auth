@@ -5,6 +5,7 @@ import Register from "./Register.js";
 import Login from './Login.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
+import InfoTooltip from './InfoTooltip.js'
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
@@ -12,7 +13,7 @@ import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js'
 import avatar from '../images/icons/avatar.svg';
 import AddPlacePopup from './AddPlacePopup';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 
 
@@ -20,6 +21,7 @@ function App() {
   const [isEditPopupOpened, setIsEditPopupOpened] = React.useState(false)
   const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false)
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false)
+  const [isTooltipOpened, setIsTooltipOpened] = React.useState(false)
   const [selectedCard, setSelectedCard] = React.useState({
     isOpened: false
   });
@@ -69,6 +71,7 @@ function App() {
     setIsEditAvatarPopupOpened(false);
     setIsEditPopupOpened(false);
     setIsAddCardPopupOpened(false);
+    setIsTooltipOpened(false);
     setSelectedCard({
       isOpened: false
     })
@@ -127,6 +130,9 @@ function App() {
           <Header />
           <Switch>
             <Route exact path="/">
+              {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-up" />}
+            </Route>
+            <Route path="/main">
               <Main
                 cards={cards}
                 onCardLike={handleCardLike}
@@ -144,6 +150,10 @@ function App() {
               <Register />
             </Route>
           </Switch>
+          <InfoTooltip
+            isOpened={isTooltipOpened}
+            onClose={closeAllPopups}
+          />
           <EditProfilePopup
             isOpened={isEditPopupOpened}
             onClose={closeAllPopups}

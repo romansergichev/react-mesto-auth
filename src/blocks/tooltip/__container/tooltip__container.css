@@ -1,0 +1,23 @@
+.tooltip__container {
+  position: relative;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 36px;
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  max-height: 330px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 622px) {
+  .tooltip__container {
+    max-width: 238px;
+    padding: 25px 22px;
+  }
+}

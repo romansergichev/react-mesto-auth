@@ -13,3 +13,5 @@
 @import url(./blocks/opacity/opacity.css);
 @import url(./blocks/background-opacity/background-opacity.css);
 @import url(./blocks/form/form.css);
+@import url(./blocks/tooltip/tooltip.css);
+@import url(./blocks/tooltip/_opened/tooltip_opened.css);
