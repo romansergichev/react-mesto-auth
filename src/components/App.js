@@ -14,14 +14,15 @@ import CurrentUserContext from '../contexts/CurrentUserContext.js'
 import avatar from '../images/icons/avatar.svg';
 import AddPlacePopup from './AddPlacePopup';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute.js';
 
 
 
 function App() {
-  const [isEditPopupOpened, setIsEditPopupOpened] = React.useState(false)
-  const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false)
-  const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false)
-  const [isTooltipOpened, setIsTooltipOpened] = React.useState(false)
+  const [isEditPopupOpened, setIsEditPopupOpened] = React.useState(false);
+  const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false);
+  const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false);
+  const [isTooltipOpened, setIsTooltipOpened] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({
     isOpened: false
   });
@@ -132,17 +133,18 @@ function App() {
             <Route exact path="/">
               {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-up" />}
             </Route>
-            <Route path="/main">
-              <Main
-                cards={cards}
-                onCardLike={handleCardLike}
-                onCardDelete={handleDeleteCard}
-                onEditProfile={handleEditClick}
-                onAddCard={handleAddCardClick}
-                onEditAvatar={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-              />
-            </Route>
+            <ProtectedRoute
+              path="/main"
+              cards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteCard}
+              onEditProfile={handleEditClick}
+              onAddCard={handleAddCardClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              loggedIn={loggedIn}
+              component={Main}
+            />
             <Route path="/sign-in">
               <Login />
             </Route>
