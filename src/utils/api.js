@@ -116,8 +116,8 @@ class Api {
       },
       method: 'POST',
       body: JSON.stringify({
-        password,
-        email
+        "password":password,
+        "email": email
       })
     })
       .then(this._checkResponse)
@@ -149,6 +149,6 @@ class Api {
   }
 }
 
-  const api = new Api(options);
+const api = new Api(options);
 
-  export default api;
+export default api;

@@ -19,7 +19,7 @@ import ProtectedRoute from './ProtectedRoute.js';
 
 
 function App() {
-  const [email, setEmail] = React.useState('');
+  const [email, setEmail] = React.useState('email@email.com');
   const [isEditPopupOpened, setIsEditPopupOpened] = React.useState(false);
   const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false);
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false);
@@ -125,6 +125,15 @@ function App() {
       .catch(error => showRequestError(error))
   }
 
+  function handleRegister( email, password ) {
+    api.register(email, password)
+      .then(user => {
+        console.log(user)
+        setEmail(user.email)
+        closeAllPopups()
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -136,6 +145,7 @@ function App() {
             <ProtectedRoute
               path="/main"
               cards={cards}
+              email={email}
               onCardLike={handleCardLike}
               onCardDelete={handleDeleteCard}
               onEditProfile={handleEditClick}
@@ -146,12 +156,12 @@ function App() {
               component={Main}
             />
             <Route path="/signin">
-              <Header linkText="Регистрация"/>
+              <Header linkText="Регистрация" />
               <Login />
             </Route>
             <Route path="/signup">
-              <Header linkText="Вход"/>
-              <Register />
+              <Header linkText="Вход" />
+              <Register onRegister={handleRegister}/>
             </Route>
           </Switch>
           <InfoTooltip
