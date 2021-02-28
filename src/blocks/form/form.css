@@ -4,7 +4,7 @@
 @import url(./__login-link/form__login-link.css);
 @import url(./__button/form__button.css);
 
-.register {
+.form {
   display: grid;
   grid-template-columns:358px;
   justify-items: center;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 425px) {
-  .register {
+  .form {
     grid-template-columns: 260px;
   }
 }

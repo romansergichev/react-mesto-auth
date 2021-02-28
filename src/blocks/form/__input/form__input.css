@@ -1,6 +1,7 @@
 .form__input {
   background: none;
   border:none;
+  color: white;
   border-bottom: 1px solid #CCCCCC;
   margin-top: 30px;
   padding: 0 0 13px 0;

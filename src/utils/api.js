@@ -3,6 +3,7 @@ import { options } from './utils.js';
 class Api {
   constructor(options) {
     this._url = options.baseUrl;
+    this._authUrl = options.authUrl;
     this._headers = options.headers;
     this._authKey = options.headers.authorization;
   }
@@ -107,8 +108,47 @@ class Api {
     )
       .then(this._checkResponse)
   }
+
+  register(email, password) {
+    return fetch(`${this._authUrl}/signup`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        password,
+        email
+      })
+    })
+      .then(this._checkResponse)
+  }
+
+  login(email, password) {
+    return fetch(`${this._authUrl}/signin`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        password,
+        email
+      })
+    })
+      .then(this._checkResponse)
+  }
+
+  validateUser(token) {
+    return fetch(`${this._authUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    })
+      .then(this._checkResponse)
+  }
 }
 
-const api = new Api(options);
+  const api = new Api(options);
 
-export default api;
+  export default api;

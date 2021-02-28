@@ -19,6 +19,7 @@ import ProtectedRoute from './ProtectedRoute.js';
 
 
 function App() {
+  const [email, setEmail] = React.useState('');
   const [isEditPopupOpened, setIsEditPopupOpened] = React.useState(false);
   const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false);
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false);
@@ -128,10 +129,9 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <div className="root">
-          <Header />
           <Switch>
             <Route exact path="/">
-              {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-up" />}
+              {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signup" />}
             </Route>
             <ProtectedRoute
               path="/main"
@@ -145,10 +145,12 @@ function App() {
               loggedIn={loggedIn}
               component={Main}
             />
-            <Route path="/sign-in">
+            <Route path="/signin">
+              <Header linkText="Регистрация"/>
               <Login />
             </Route>
-            <Route path="/sign-up">
+            <Route path="/signup">
+              <Header linkText="Вход"/>
               <Register />
             </Route>
           </Switch>

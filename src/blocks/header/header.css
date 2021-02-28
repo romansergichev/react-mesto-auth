@@ -1,7 +1,14 @@
 @import url(./__logo/header__logo.css);
 @import url(./__logo-link/header__logo-link.css);
+@import url(./__exit/header__exit.css);
+@import url(./__login-container/header__login-container.css);
+@import url(./__login/header__login.css);
 
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
   max-width: 882px;
   width: 100%;
   border-bottom: 1px solid #545454b0;

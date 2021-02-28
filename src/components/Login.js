@@ -2,7 +2,7 @@ import FormContent from './FormContent.js';
 
 function Login() {
   return (
-    <form className="register">
+    <form className="form">
       <FormContent signIn/>
     </form>
   )

@@ -1,0 +1,6 @@
+.header__login-container{
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
+  margin-bottom: 40px;
+}
