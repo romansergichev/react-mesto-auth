@@ -8,7 +8,7 @@ function ProtectedRoute({ component: Component, ...props }) {
       {() =>
         props.loggedIn
           ? <>
-            <Header loggedIn email={props.email} />
+            <Header loggedIn email={props.email} onSignOut={props.onSignOut}/>
             <Component {...props} />
           </>
           : <Redirect to="sign-up" />

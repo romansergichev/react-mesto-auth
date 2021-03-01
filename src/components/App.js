@@ -24,6 +24,7 @@ function App() {
   const [isAddCardPopupOpened, setIsAddCardPopupOpened] = React.useState(false);
   const [isEditAvatarPopupOpened, setIsEditAvatarPopupOpened] = React.useState(false);
   const [isTooltipOpened, setIsTooltipOpened] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({
     isOpened: false
   });
@@ -59,6 +60,10 @@ function App() {
 
   function handleAddCardClick() {
     setIsAddCardPopupOpened(true);
+  }
+
+  function handleTooltipOpen() {
+    setIsTooltipOpened(true);
   }
 
   function handleCardClick(card) {
@@ -126,12 +131,24 @@ function App() {
   }
 
   function handleRegister( email, password ) {
-    api.register(email, password)
+    return api.register(email, password)
       .then(user => {
         console.log(user)
         setEmail(user.email)
         closeAllPopups()
       })
+  }
+
+  function handleLogin(email, password) {
+    return api.login(email, password)
+      .then(token => {
+        console.log(token)
+        setLoggedIn(true);
+      })
+  }
+
+  function handleSignOut() {
+    setLoggedIn(false);
   }
 
   return (
@@ -154,10 +171,11 @@ function App() {
               onCardClick={handleCardClick}
               loggedIn={loggedIn}
               component={Main}
+              onSignOut={handleSignOut}
             />
             <Route path="/signin">
               <Header linkText="Регистрация" />
-              <Login />
+              <Login onLogin={handleLogin}/>
             </Route>
             <Route path="/signup">
               <Header linkText="Вход" />

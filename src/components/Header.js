@@ -1,7 +1,7 @@
 import logo from '../images/icons/mesto-logo.svg';
 import { Link } from 'react-router-dom';
 
-function Header({ linkText, loggedIn, email }) {
+function Header({ linkText, loggedIn, email, onSignOut }) {
   return (
     <header className="header">
       <Link to="/" target="_self" className="header__logo-link">
@@ -10,7 +10,9 @@ function Header({ linkText, loggedIn, email }) {
       <div className="header__login-container">
         {
           loggedIn
-            ? <p className="header__user">{email}<Link to="/signin" className="header__exit">Выйти</Link></p>
+            ? <p className="header__user">{email + ' '}
+                <Link to="/signin" className="header__exit opacity" onClick={onSignOut}>Выйти</Link>
+              </p>
             : <Link to={linkText === 'Вход' ? '/signin' : '/signup'} className="header__login opacity">{linkText}</Link>
         }
       </div>
