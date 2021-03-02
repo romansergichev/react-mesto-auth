@@ -11,9 +11,9 @@ function Header({ linkText, loggedIn, email, onSignOut }) {
         {
           loggedIn
             ? <p className="header__user">{email + ' '}
-                <Link to="/signin" className="header__exit opacity" onClick={onSignOut}>Выйти</Link>
+                <Link to="/sign-in" className="header__exit opacity" onClick={onSignOut}>Выйти</Link>
               </p>
-            : <Link to={linkText === 'Вход' ? '/signin' : '/signup'} className="header__login opacity">{linkText}</Link>
+            : <Link to={linkText === 'Вход' ? '/sign-in' : '/sign-up'} className="header__login opacity">{linkText}</Link>
         }
       </div>
     </header>

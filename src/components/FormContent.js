@@ -1,8 +1,6 @@
 function FormContent({setPassword, setEmail, signIn}) {
-  console.log(signIn)
 
   function handleEmailChange(evt) {
-    console.log(evt.target.value)
     setEmail(evt.target.value)
   }
 

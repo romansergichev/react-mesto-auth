@@ -13,7 +13,7 @@ class Api {
       return response.json()
     }
     else {
-      return Promise.reject(`Ошибка ${response.status}`)
+      return Promise.reject(response.json())
     }
   }
 

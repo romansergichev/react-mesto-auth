@@ -13,7 +13,7 @@ import api from '../utils/api.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js'
 import avatar from '../images/icons/avatar.svg';
 import AddPlacePopup from './AddPlacePopup';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute.js';
 
 
@@ -35,6 +35,7 @@ function App() {
   });
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const history = useHistory();
 
   function showRequestError(error) {
     return console.log(`Ошибка: ${error}`);
@@ -60,10 +61,6 @@ function App() {
 
   function handleAddCardClick() {
     setIsAddCardPopupOpened(true);
-  }
-
-  function handleTooltipOpen() {
-    setIsTooltipOpened(true);
   }
 
   function handleCardClick(card) {
@@ -130,37 +127,85 @@ function App() {
       .catch(error => showRequestError(error))
   }
 
-  function handleRegister( email, password ) {
+  function handleRegister(email, password) {
     return api.register(email, password)
       .then(user => {
-        console.log(user)
         setEmail(user.email)
-        closeAllPopups()
+        setIsSuccess(true)
+        setIsTooltipOpened(true)
+        history.push('/sign-in')
+      })
+      .catch(()=>{
+        setIsTooltipOpened(true)
+        setIsSuccess(false)
+        history.push('/')
       })
   }
 
   function handleLogin(email, password) {
     return api.login(email, password)
-      .then(token => {
-        console.log(token)
-        setLoggedIn(true);
+      .then(res => {
+        localStorage.setItem('token', res.token)
+        setEmail(email)
+        setLoggedIn(true)
+        history.push('/')
+      })
+      .catch(() => {
+        setIsTooltipOpened(true)
+        setIsSuccess(false)
+        history.push('/sign-in')
       })
   }
 
   function handleSignOut() {
     setLoggedIn(false);
+    localStorage.removeItem('token');
   }
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.validateUser(token)
+        .then(res => {
+          if(res) {
+            setEmail(res.data.email)
+            setLoggedIn(true)
+            history.push('/')
+          }
+        })
+    }
+
+  }, [history])
+
+  React.useEffect(() => {
+    function onKeypress(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups()
+      }
+    }
+
+    function onMouseDown(evt) {
+      if(evt.target.classList.contains('popup')){
+        closeAllPopups()
+      }
+    }
+
+    document.addEventListener('mousedown', onMouseDown)
+    document.addEventListener('keydown', onKeypress)
+    
+    return () => {
+      document.removeEventListener('mousedowm', onMouseDown)
+      document.removeEventListener('keydown', onKeypress)
+    }
+  }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <div className="root">
           <Switch>
-            <Route exact path="/">
-              {loggedIn ? <Redirect to="/main" /> : <Redirect to="/signup" />}
-            </Route>
             <ProtectedRoute
-              path="/main"
+              exact path="/"
               cards={cards}
               email={email}
               onCardLike={handleCardLike}
@@ -173,18 +218,22 @@ function App() {
               component={Main}
               onSignOut={handleSignOut}
             />
-            <Route path="/signin">
-              <Header linkText="Регистрация" />
-              <Login onLogin={handleLogin}/>
+            <Route exact path="/">
+              {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
             </Route>
-            <Route path="/signup">
+            <Route path="/sign-in">
+              <Header linkText="Регистрация" />
+              <Login onLogin={handleLogin} />
+            </Route>
+            <Route path="/sign-up">
               <Header linkText="Вход" />
-              <Register onRegister={handleRegister}/>
+              <Register onRegister={handleRegister} />
             </Route>
           </Switch>
           <InfoTooltip
             isOpened={isTooltipOpened}
             onClose={closeAllPopups}
+            isSuccess={isSuccess}
           />
           <EditProfilePopup
             isOpened={isEditPopupOpened}

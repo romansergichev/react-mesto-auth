@@ -1,10 +1,9 @@
 import success from '../images/icons/success.svg'
 import fail from '../images/icons/fail.svg'
 
-function InfoTooltip({ isOpened, onClose }) {
-  const isSuccess = false;
+function InfoTooltip({ isOpened, onClose, isSuccess }) {
   return (
-    <div className={`tooltip ${isOpened && 'tooltip_opened'}`}>
+    <div className={`popup tooltip ${isOpened && 'tooltip_opened'}`}>
       <div className="tooltip__container">
         <button
           type="button"
@@ -12,7 +11,7 @@ function InfoTooltip({ isOpened, onClose }) {
           onClick={onClose}
         >
         </button>
-        <img className="tooltip__image" src={isSuccess ? success : fail} />
+        <img className="tooltip__image" alt='' src={isSuccess ? success : fail} />
         <h2 className="tooltip__text">
           {
             isSuccess
