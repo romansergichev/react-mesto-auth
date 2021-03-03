@@ -1,21 +1,22 @@
-function FormContent({setPassword, setEmail, signIn}) {
+function FormContent(props) {
 
   function handleEmailChange(evt) {
-    setEmail(evt.target.value)
+    props.setEmail(evt.target.value)
   }
 
   function handlePasswordChange(evt) {
-    setPassword(evt.target.value)
+    props.setPassword(evt.target.value)
   }
 
   return (
-    <>
-      <p className="form__title">{signIn ? 'Вход' : 'Регистрация'}</p>
+    <form className="form" onSubmit={props.onSubmit}>
+      <p className="form__title">{props.signIn ? 'Вход' : 'Регистрация'}</p>
       <input
         className="form__input"
         name="email"
         type="email"
         placeholder="E-mail"
+        value={props.email}
         onChange={handleEmailChange}
       />
       <input
@@ -23,10 +24,12 @@ function FormContent({setPassword, setEmail, signIn}) {
         name="password"
         type="password"
         placeholder="Пароль"
+        value={props.password}
         onChange={handlePasswordChange}
       />
-      <button className="form__button">{signIn ? 'Войти' : 'Зарегистрироваться'}</button>
-    </>
+      <button className="form__button">{props.signIn ? 'Войти' : 'Зарегистрироваться'}</button>
+      {props.children}
+    </form>
   )
 }
 

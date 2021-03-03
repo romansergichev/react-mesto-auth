@@ -38,6 +38,7 @@ function AddPlacePopup({ isOpened, onClose, onPlaceSubmit }) {
           placeholder="Название"
           className="popup__input popup__input_type_place"
           minLength="2" maxLength="30"
+          value={name}
           onChange={handleNameChange}
           required
         />
@@ -50,6 +51,7 @@ function AddPlacePopup({ isOpened, onClose, onPlaceSubmit }) {
           id="place-link-input"
           placeholder="Ссылка на картинку"
           className="popup__input popup__input_type_link"
+          value={link}
           onChange={handleLinkChange}
           required
         />

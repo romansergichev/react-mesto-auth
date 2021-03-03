@@ -12,10 +12,15 @@ function Register({ onRegister }) {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <FormContent setPassword={setPassword} setEmail={setEmail}/>
+    <FormContent
+      password={password}
+      email={email}
+      setPassword={setPassword}
+      setEmail={setEmail}
+      onSubmit={handleSubmit}
+    >
       <p className="form__login">Уже зарегистрированы?<Link to="/sign-in" className="form__login-link opacity"> Войти</Link></p>
-    </form>
+    </FormContent>
   )
 }
 

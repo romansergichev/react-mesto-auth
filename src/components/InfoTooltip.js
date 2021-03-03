@@ -11,7 +11,7 @@ function InfoTooltip({ isOpened, onClose, isSuccess }) {
           onClick={onClose}
         >
         </button>
-        <img className="tooltip__image" alt='' src={isSuccess ? success : fail} />
+        <img className="tooltip__image" alt={isSuccess ? 'Успех' : 'Что-то не так'}  src={isSuccess ? success : fail} />
         <h2 className="tooltip__text">
           {
             isSuccess

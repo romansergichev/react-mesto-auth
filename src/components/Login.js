@@ -13,9 +13,14 @@ function Login({ onLogin }) {
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <FormContent setPassword={setPassword} setEmail={setEmail} signIn/> 
-    </form>
+    <FormContent
+      password={password}
+      email={email}
+      setPassword={setPassword}
+      setEmail={setEmail}
+      onSubmit={handleSubmit}
+      signIn
+    />
   )
 }
 
